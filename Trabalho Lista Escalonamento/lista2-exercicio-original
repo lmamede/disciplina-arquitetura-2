@@ -1,0 +1,23 @@
+
+        .data
+
+B: .word 1,1,1,1,1,1,1,1,1,1
+
+A: .word 0,0,0,0,0,0,0,0,0,0
+
+.text
+
+DADDI R16, R0, B ;; R16 = ENDEREÇO DE B[0]
+DADD R1, R0, R0 ;; I = 0
+LACO:
+DSLL R8, R1, #2 ;; R8 = 4I
+DADD R17, R16, R8 ;; R17 = ENDEREÇO DE B[I]
+LD R8, 0(R17) ;; R8 = B[I]
+DSRL R8, R8, #1 ;; R8 = B[I] /2
+LD R9, A(R0) ;; R9 = A
+DADD R8, R8, R9 ;; R8 = A + B[I]/2
+SD R8, A(R0) ;; A = R8
+DADDI R1, R1, #1 ;; I = I +1
+SLTI R8, R1, #10 ;; SE R1 < 10 ENTÃO R8 = 1
+BNEZ R8, LACO ;; SE R8 = = 1 ENTÃO PC = LACO
+HALT
