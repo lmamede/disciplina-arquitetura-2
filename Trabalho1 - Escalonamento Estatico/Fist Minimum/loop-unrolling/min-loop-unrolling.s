@@ -36,6 +36,6 @@ LOOP:
     sd R2, 0(R4)        
 
 GREAT:
-    daddi R2, R2, 1     ;;21     
-    slt R1, R2, R3      ;;22     
+    daddi R2, R2, 1     
+    slt R1, R2, R3      
     bne R1, R0, LOOP
